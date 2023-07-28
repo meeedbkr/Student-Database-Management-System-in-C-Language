@@ -11,7 +11,7 @@ void saveToFile(LinkedList* list, const char* filename) {
             current = current->next;
         }
         fclose(file);
-        printf("Data saved to file successfully.\n");
+        // printf("Data saved to file successfully.\n");
     } else {
         printf("Error: Unable to save data to file.\n");
     }
@@ -27,7 +27,7 @@ LinkedList* loadFromFile(const char* filename) {
             insertNode(list, &student);
         }
         fclose(file);
-        printf("Data loaded from file successfully.\n");
+        // printf("Data loaded from file successfully.\n");
         return list;
     } else {
         printf("Error: Unable to load data from file.\n");

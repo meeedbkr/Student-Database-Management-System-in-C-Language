@@ -17,12 +17,40 @@ void updateDataService() {
     saveToFile(studentsList, studentDataFile);
 }
 
+void displayAllStudentsService() {
+    displayLinkedList(studentsList);
+}
+
+int integrityCheck(int rollNumber) {
+    Node* current = studentsList->head;
+
+    while (current != NULL) {
+        if (current->student.rollNumber == rollNumber) {
+            return 1; // Student with the given roll number found
+        }
+        current = current->next;
+    }
+
+    return 0; // Student with the given roll number not found
+}
+
 void addStudentService() {
     Student newStudent;
     printf("Enter Student Name: ");
     scanf(" %[^\n]", newStudent.name);
-    printf("Enter Roll Number: ");
-    scanf("%d", &newStudent.rollNumber);
+
+    int rollNumber;
+    do {
+        printf("Enter Roll Number: ");
+        scanf("%d", &rollNumber);
+
+        if (integrityCheck(rollNumber)) {
+            printf("A student with the same Roll Number already exists. Please try again.\n");
+        }
+    } while (integrityCheck(rollNumber));
+
+    newStudent.rollNumber = rollNumber;
+
     printf("Enter Age: ");
     scanf("%d", &newStudent.age);
     printf("Enter Grade: ");
@@ -31,10 +59,6 @@ void addStudentService() {
     insertNode(studentsList, &newStudent);
     updateDataService();
     printf("Student added successfully.\n");
-}
-
-void displayAllStudentsService() {
-    displayLinkedList(studentsList);
 }
 
 void searchStudentService() {

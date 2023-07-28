@@ -12,8 +12,6 @@ int main() {
         printf("3. Search Student\n");
         printf("4. Update Student\n");
         printf("5. Delete Student\n");
-        printf("6. Save to File\n");
-        printf("7. Load from File\n");
         printf("0. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
@@ -33,12 +31,6 @@ int main() {
                 break;
             case 5:
                 deleteStudentService();
-                break;
-            case 6:
-                saveToFileService();
-                break;
-            case 7:
-                loadFromFileService();
                 break;
             case 0:
                 printf("Exiting program. Goodbye!\n");

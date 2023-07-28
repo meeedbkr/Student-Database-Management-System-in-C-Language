@@ -25,10 +25,7 @@ void updateStudentService();
 // Delete a student from the database
 void deleteStudentService();
 
-// Save student records to a file
-void saveToFileService();
-
-// Load student records from a file
-void loadFromFileService();
+// update database
+void updateDataService();
 
 #endif // STUDENT_SERVICE_H

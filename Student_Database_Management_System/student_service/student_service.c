@@ -2,14 +2,19 @@
 #include "student_service.h"
 
 static LinkedList* studentsList = NULL;
+const char* studentDataFile = "data/studentDataFile.txt";
 
 void initializeStudentService() {
-    studentsList = createLinkedList();
+    studentsList = loadFromFile(studentDataFile);
 }
 
 void cleanupStudentService() {
     destroyLinkedList(studentsList);
     studentsList = NULL;
+}
+
+void updateDataService() {
+    saveToFile(studentsList, studentDataFile);
 }
 
 void addStudentService() {
@@ -24,6 +29,7 @@ void addStudentService() {
     scanf("%f", &newStudent.grade);
 
     insertNode(studentsList, &newStudent);
+    updateDataService();
     printf("Student added successfully.\n");
 }
 
@@ -56,6 +62,7 @@ void updateStudentService() {
         printf("Enter new Grade: ");
         scanf("%f", &result->student.grade);
         printf("Student information updated.\n");
+        updateDataService();
     } else {
         printf("Student not found.\n");
     }
@@ -67,21 +74,6 @@ void deleteStudentService() {
     scanf("%d", &rollNumber);
 
     deleteNode(studentsList, rollNumber);
-}
+    updateDataService();
 
-void saveToFileService() {
-    char filename[100];
-    printf("Enter the filename to save data: ");
-    scanf(" %[^\n]", filename);
-
-    saveToFile(studentsList, filename);
-}
-
-void loadFromFileService() {
-    char filename[100];
-    printf("Enter the filename to load data from: ");
-    scanf(" %[^\n]", filename);
-
-    cleanupStudentService();
-    studentsList = loadFromFile(filename);
 }
